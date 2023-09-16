@@ -10,7 +10,7 @@
     <meta name="HandheldFriendly" content="True" />
     <meta name="robots" content="noindex,nofollow" />
     <title></title>
-    <script src="https://telegram.org/js/telegram-web-app.js?1"></script>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
         function setThemeClass() {
             document.documentElement.className = Telegram.WebApp.colorScheme;
@@ -293,7 +293,7 @@
 <body class="" style="visibility: hidden;">
 
 <section id="top_sect" class="second">
-    <button id="main_btn" onclick="DemoApp.sendMessage(localStorage.getItem('test'));">Send «Hello, World!»</button>
+    <button id="main_btn" onclick="DemoApp.sendMessage('');">localStorage.getItem('test')</button>
     <button id="with_webview_btn" onclick="DemoApp.sendMessage('', true);">Send «Hello, World!» with inline webview button</button>
     <button id="data_btn" onclick="DemoApp.sendTime(true);">Send current time to bot (x10)</button>
     <button onclick="DemoApp.expand();">Expand Webview</button>
@@ -344,7 +344,7 @@
     <p>Test alerts:</p>
     <div class="columns">
         <ul>
-            <li><a href="javascript:;" onclick="alert('Hello!');">alert</a></li>
+            <li><a href="javascript:;" onclick="alert(localStorage.getItem('test'));">alert</a></li>
             <li><a href="javascript:;" onclick="confirm('Are you sure?');">confirm</a></li>
             <li><a href="javascript:;" onclick="prompt('How old are you?');">prompt</a></li>
         </ul>
@@ -419,7 +419,6 @@
 
         // actions
         sendMessage(msg_id, with_webview) {
-            console.log(msg_id);
             if (!DemoApp.initDataUnsafe.query_id) {
                 alert('WebViewQueryId not defined');
                 return;
@@ -756,12 +755,12 @@
     document.getElementById('text_field').focus();
     document.getElementById('regular_field').addEventListener('input', function(e) {
         localStorage.setItem('test',this.value);
-/*         const val = this.value.toLowerCase();
+         const val = this.value.toLowerCase();
         if (val.indexOf('progress') >= 0) {
             Telegram.WebApp.MainButton.showProgress();
         } else {
             Telegram.WebApp.MainButton.hideProgress();
-        } */
+        } 
     });
 
     document.getElementById('ver').innerHTML = Telegram.WebApp.version;
