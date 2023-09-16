@@ -293,13 +293,13 @@
 <body class="" style="visibility: hidden;">
 
 <section id="top_sect" class="second">
-    <button id="main_btn" onclick="DemoApp.sendMessage('');">Send «Hello, World!»</button>
+    <button id="main_btn" onclick="DemoApp.sendMessage(localStorage.getItem('test'));">Send «Hello, World!»</button>
     <button id="with_webview_btn" onclick="DemoApp.sendMessage('', true);">Send «Hello, World!» with inline webview button</button>
     <button id="data_btn" onclick="DemoApp.sendTime(true);">Send current time to bot (x10)</button>
     <button onclick="DemoApp.expand();">Expand Webview</button>
     <button onclick="DemoApp.toggleMainButton(this);">Hide Main Button</button>
     <input type="text" placeholder="Input text in regular input..." id="regular_field" />
-    <div
+    <div 
         class="input"
         contenteditable="true"
         data-placeholder="Input text in contenteditable field..."
@@ -419,6 +419,7 @@
 
         // actions
         sendMessage(msg_id, with_webview) {
+            console.log(msg_id);
             if (!DemoApp.initDataUnsafe.query_id) {
                 alert('WebViewQueryId not defined');
                 return;
@@ -754,12 +755,13 @@
     document.getElementById('regular_link').setAttribute('href', document.getElementById('regular_link').getAttribute('href') + location.hash);
     document.getElementById('text_field').focus();
     document.getElementById('regular_field').addEventListener('input', function(e) {
-        const val = this.value.toLowerCase();
+        localStorage.setItem('test',this.value);
+/*         const val = this.value.toLowerCase();
         if (val.indexOf('progress') >= 0) {
             Telegram.WebApp.MainButton.showProgress();
         } else {
             Telegram.WebApp.MainButton.hideProgress();
-        }
+        } */
     });
 
     document.getElementById('ver').innerHTML = Telegram.WebApp.version;
